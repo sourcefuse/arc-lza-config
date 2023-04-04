@@ -117,7 +117,7 @@ reports:
           threshold: 100
           comparisonOperator: GREATER_THAN
           subscriptionType: EMAIL
-          address: UNIQUE EMAIL FOR BUDGET <--- REPLACE
+          address: UNIQUE EMAIL FOR BUDGET, REUSE FOR ALL BELOW <--- REPLACE
         - type: ACTUAL
           thresholdType: PERCENTAGE
           threshold: 90
