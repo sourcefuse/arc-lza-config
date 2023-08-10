@@ -13,7 +13,7 @@ snsTopics:
   topics:
     - name: Security
       emailAddresses:
-        - UNIQUE EMAIL FOR SECURITY <--- REPLACE
+        -  ${{ values.global_security_email }}
 controlTower:
   enable: true
 logging:
@@ -117,31 +117,31 @@ reports:
           threshold: 100
           comparisonOperator: GREATER_THAN
           subscriptionType: EMAIL
-          address: UNIQUE EMAIL FOR BUDGET, REUSE FOR ALL BELOW <--- REPLACE
+          address: ${{ values.budget_notifications_email }}
         - type: ACTUAL
           thresholdType: PERCENTAGE
           threshold: 90
           comparisonOperator: GREATER_THAN
           subscriptionType: EMAIL
-          address: UNIQUE EMAIL FOR BUDGET <--- REPLACE
+          address: ${{ values.budget_notifications_email }}
         - type: ACTUAL
           thresholdType: PERCENTAGE
           threshold: 80
           comparisonOperator: GREATER_THAN
           subscriptionType: EMAIL
-          address: UNIQUE EMAIL FOR BUDGET <--- REPLACE
+          address: ${{ values.budget_notifications_email }}
         - type: ACTUAL
           thresholdType: PERCENTAGE
           threshold: 75
           comparisonOperator: GREATER_THAN
           subscriptionType: EMAIL
-          address: UNIQUE EMAIL FOR BUDGET <--- REPLACE
+          address: ${{ values.budget_notifications_email }}
         - type: ACTUAL
           thresholdType: PERCENTAGE
           threshold: 50
           comparisonOperator: GREATER_THAN
           subscriptionType: EMAIL
-          address: UNIQUE EMAIL FOR BUDGET <--- REPLACE
+          address: ${{ values.budget_notifications_email }}
 backup:
   vaults:
     - name: BackupVault
