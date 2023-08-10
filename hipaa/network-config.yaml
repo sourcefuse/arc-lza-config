@@ -218,6 +218,11 @@ vpcs:
         - service: ssmmessages
         - service: kms
         - service: logs
+        - service: rds
+        - service: rds-data
+        - service: dms
+        - service: s3
+        - service: mgn
   - name: Network-Inspection
     account: Network-Prod
     region: *HOME_REGION
@@ -342,17 +347,17 @@ vpcs:
         - service: s3
         - service: dynamodb
     useCentralEndpoints: true
-  - name: HIS-pacs-Non-Prod-Main
-    account: Pacs-Non_prod
+  - name: HIS-WL-Non-Prod-Main
+    account: HIS-WL-NON-PROD
     region: *HOME_REGION
     cidrs:
       - 10.4.0.0/16
     routeTables:
-      - name: HIS-pacs-Non-Prod-Tgw-A
+      - name: HIS-WL-Non-Prod-Tgw-A
         routes: []
-      - name: HIS-pacs-Non-Prod-Tgw-B
+      - name: HIS-WL-Non-Prod-Tgw-B
         routes: []
-      - name: HIS-pacs-Non-Prod-App-A
+      - name: HIS-WL-Non-Prod-App-A
         routes:
           - name: TgwRoute
             destination: 0.0.0.0/0
@@ -364,7 +369,7 @@ vpcs:
           - name: DynamoDBGateway
             type: gatewayEndpoint
             target: dynamodb
-      - name: HIS-pacs-Non-Prod-App-B
+      - name: HIS-WL-Non-Prod-App-B
         routes:
           - name: TgwRoute
             destination: 0.0.0.0/0
@@ -377,24 +382,24 @@ vpcs:
             type: gatewayEndpoint
             target: dynamodb
     subnets:
-      - name: HIS-pacs-Non-Prod-App-A
+      - name: HIS-WL-Non-Prod-App-A
         availabilityZone: a
-        routeTable: HIS-pacs-Non-Prod-App-A
+        routeTable: HIS-WL-Non-Prod-App-A
         ipv4CidrBlock: 10.4.0.0/24
-      - name: HIS-pacs-Non-Prod-App-B
+      - name: HIS-WL-Non-Prod-App-B
         availabilityZone: b
-        routeTable: HIS-pacs-Non-Prod-App-B
+        routeTable: HIS-WL-Non-Prod-App-B
         ipv4CidrBlock: 10.4.1.0/24
-      - name: HIS-pacs-Non-Prod-MainTgwAttach-A
+      - name: HIS-WL-Non-Prod-MainTgwAttach-A
         availabilityZone: a
-        routeTable: HIS-pacs-Non-Prod-Tgw-A
+        routeTable: HIS-WL-Non-Prod-Tgw-A
         ipv4CidrBlock: 10.4.255.208/28
-      - name: HIS-pacs-Non-Prod-MainTgwAttach-B
+      - name: HIS-WL-Non-Prod-MainTgwAttach-B
         availabilityZone: b
-        routeTable: HIS-pacs-Non-Prod-Tgw-B
+        routeTable: HIS-WL-Non-Prod-Tgw-B
         ipv4CidrBlock: 10.4.255.224/28
     transitGatewayAttachments:
-      - name: HIS-pacs-Non-Prod-Main
+      - name: HIS-WL-Non-Prod-Main
         transitGateway:
           name: Network-Main
           account: Network-Prod
@@ -403,26 +408,31 @@ vpcs:
         routeTablePropagations:
           - Network-Main-Core
         subnets:
-          - HIS-pacs-Non-Prod-MainTgwAttach-A
-          - HIS-pacs-Non-Prod-MainTgwAttach-B
+          - HIS-WL-Non-Prod-MainTgwAttach-A
+          - HIS-WL-Non-Prod-MainTgwAttach-B
     gatewayEndpoints:
       defaultPolicy: Default
       endpoints:
         - service: s3
         - service: dynamodb
     useCentralEndpoints: true
-  - name: HIS-pms-Prod-Main
-    account: Pms-Prod
+  - name: HIS-WL-Prod-Main
+    account: HIS-WL-PROD
     region: *HOME_REGION
     cidrs:
       - 10.3.0.0/16
+    internetGateway: true
     routeTables:
-      - name: HIS-pms-Prod-Tgw-A
+      - name: HIS-WL-Prod-Tgw-A
         routes: []
-      - name: HIS-pms-Prod-Tgw-B
+      - name: HIS-WL-Prod-Tgw-B
         routes: []
-      - name: HIS-pms-Prod-App-A
+      - name: HIS-WL-Prod-App-A
         routes:
+#          - name: NatRoute
+#            destination: 0.0.0.0/0
+#            type: natGateway
+#            target: Nat-HIS-WL-Prod-Public-App-A
           - name: TgwRoute
             destination: 0.0.0.0/0
             type: transitGateway
@@ -433,8 +443,12 @@ vpcs:
           - name: DynamoDBGateway
             type: gatewayEndpoint
             target: dynamodb
-      - name: HIS-pms-Prod-App-B
+      - name: HIS-WL-Prod-App-B
         routes:
+#          - name: NatRoute
+#            destination: 0.0.0.0/0
+#            type: natGateway
+#            target: Nat-HIS-WL-Prod-Public-App-B
           - name: TgwRoute
             destination: 0.0.0.0/0
             type: transitGateway
@@ -445,25 +459,50 @@ vpcs:
           - name: DynamoDBGateway
             type: gatewayEndpoint
             target: dynamodb
+      - name: HIS-WL-Prod-Public-App-A
+        routes:
+          - name: IgwRoute
+            destination: 0.0.0.0/0
+            type: internetGateway
+            target: IGW
+      - name: HIS-WL-Prod-Public-App-B
+        routes:
+          - name: IgwRoute
+            destination: 0.0.0.0/0
+            type: internetGateway
+            target: IGW
     subnets:
-      - name: HIS-pms-Prod-App-A
+      - name: HIS-WL-Prod-App-A
         availabilityZone: a
-        routeTable: HIS-pms-Prod-App-A
+        routeTable: HIS-WL-Prod-App-A
         ipv4CidrBlock: 10.3.0.0/24
-      - name: HIS-pms-Prod-App-B
+      - name: HIS-WL-Prod-App-B
         availabilityZone: b
-        routeTable: HIS-pms-Prod-App-B
+        routeTable: HIS-WL-Prod-App-B
         ipv4CidrBlock: 10.3.1.0/24
-      - name: HIS-pms-Prod-MainTgwAttach-A
+      - name: HIS-WL-Prod-Public-App-A
         availabilityZone: a
-        routeTable: HIS-pms-Prod-Tgw-A
-        ipv4CidrBlock: 10.3.255.208/28
-      - name: HIS-pms-Prod-MainTgwAttach-B
+        routeTable: HIS-WL-Prod-Public-App-A
+        ipv4CidrBlock: 10.3.2.0/24
+      - name: HIS-WL-Prod-Public-App-B
         availabilityZone: b
-        routeTable: HIS-pms-Prod-Tgw-B
+        routeTable: HIS-WL-Prod-Public-App-B
+        ipv4CidrBlock: 10.3.3.0/24
+      - name: HIS-WL-Prod-MainTgwAttach-A
+        availabilityZone: a
+        routeTable: HIS-WL-Prod-Tgw-A
+        ipv4CidrBlock: 10.3.255.208/28
+      - name: HIS-WL-Prod-MainTgwAttach-B
+        availabilityZone: b
+        routeTable: HIS-WL-Prod-Tgw-B
         ipv4CidrBlock: 10.3.255.224/28
+    natGateways:
+      - name: Nat-HIS-WL-Prod-Public-App-A
+        subnet: HIS-WL-Prod-Public-App-A
+      - name: Nat-HIS-WL-Prod-Public-App-B
+        subnet: HIS-WL-Prod-Public-App-B
     transitGatewayAttachments:
-      - name: HIS-pms-Prod-Main
+      - name: HIS-WL-Prod-Main
         transitGateway:
           name: Network-Main
           account: Network-Prod
@@ -472,8 +511,8 @@ vpcs:
         routeTablePropagations:
           - Network-Main-Core
         subnets:
-          - HIS-pms-Prod-MainTgwAttach-A
-          - HIS-pms-Prod-MainTgwAttach-B
+          - HIS-WL-Prod-MainTgwAttach-A
+          - HIS-WL-Prod-MainTgwAttach-B
     gatewayEndpoints:
       defaultPolicy: Default
       endpoints: []

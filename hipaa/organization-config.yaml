@@ -2,12 +2,12 @@ enable: true
 organizationalUnits:
   - name: Security
   - name: Infrastructure
-  - name: Infrastructure/Infra-Dev
-  - name: Infrastructure/Infra-Prod
+  - name: Infrastructure/INFRA-DEV
+  - name: Infrastructure/INFRA-PROD
   - name: HIS
   - name: EIS
-  - name: HIS/HIS-Non-Prod
-  - name: HIS/HIS-Prod
+  - name: HIS/HIS-NON-PROD
+  - name: HIS/HIS-PROD
 serviceControlPolicies:
   - name: AcceleratorGuardrails1
     description: >

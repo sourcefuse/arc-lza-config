@@ -6,6 +6,23 @@ The Landing Zone Accelerator (LZA) for Healthcare is an industry specific deploy
 
 The Healthcare industry best practices folder contains the deviation from the default [aws-best-practices](https://github.com/awslabs/landing-zone-accelerator-on-aws/tree/main/reference/sample-configurations/aws-best-practices) and the differences are noted in this readme.  To leverage these configs it is first expected that you use all of the `aws-best-practices` before adding or replacing the configuration files referenced in this folder.  The primary deviations from the `aws-best-practices` and the healthcare industry are related to the Organization/Account structure and the Network topology.  It is important to note that the Landing Zone Accelerator solution will not, by itself, make you compliant. It provides the foundational infrastructure from which additional complementary solutions can be integrated. You must review, evaluate, assess, and approve the solution in compliance with your organization’s particular security features, tools, and configurations.
 
+**NOTE: This is the SourceFuse base implementation that was developed from real work deployments.** The example provided by AWS is for a fictional app that does not fit well with most implementations. Our baseline provides a simplified structure for the accounts in the HIS OU.
+
+## Replacement Variables
+If you are not using our Backstage template to generate the files, you must replace the following values in the config files.
+
+| Token                                     | Description                                                        |
+|-------------------------------------------|--------------------------------------------------------------------|
+| `${{ values.mgmt_account_email }}`        | Root/Management Account Email Address                              |
+| `${{ values.log_archive_account_email }}` | Log Archive Account Email Address                                  |
+| `${{ values.audit_archive_account_email }}` | Audit Account Email Address                                        |
+| `${{ values.network_dev_account_email }}` | Network Dev Account Email Address                                  |
+| `${{ values.network_prod_account_email }}` | Network Prod Account Email Address                                 |
+| `${{ values.his_non_prod_wl_account_email }}` | HIS Workload Non-Prod Account Email Address                        |
+| `${{ values.his_prod_wl_account_email }}` | HIS Workload Prod Account Email Address                            |
+| `${{ values.global_security_email }}` | Global Security Email address for Config Rule Change Notifications |
+| `${{ values.budget_notifications_email }}` | Budget Notifications Email                                         |
+
 ## Deployment Overview
 
 Use the following steps to deploy the industry guidance. For detailed instructions, follow the links for each step.
@@ -66,15 +83,15 @@ Healthcare LZA accounts are generated and organized as follows:
 |       +-- Audit
 |   +-- Infrastructure
 |       +-- Infra-Prod
-|       +-- Infra-Dev
+|           +-- Network-Prod
+|           +-- Network-Dev
 |   +-- HIS
-|       +-- HIS-Non-Prod
-|       +-- HIS-Prod
+|       +-- HIS-WL-PROD
+|       +-- HIS-WL-NON-PROD
 |   +-- EIS
 ```
 -->
-![Healthcare LZA Org Structure](images/LZA_EGA_Healthcare_Org_Structure.png)
-
+![Healthcare LZA Org Structure](images/arc_healthcare_lza_ou.png)
 The Health Information System (HIS) Organizational Unit (OU) represents the logical construct where workloads that contain sentitive data, such as critical business or Personal Health Information (PHI). Whereas, the Executive Information System (EIS) OU is intended for business workloads that may not require the same regulatory controls.  This OU structure is provided for you.  However, you are free to change the organizational structure, Organizational Units (OUs), and accounts to meet your specific needs.  For additional information about how to best organize your AWS OU and account structure, please referece the Recommended OUs and accounts in the [For further consideration](#for-further-consideration) section below as you begin to experiment with the LZA for Healthcare.
 
 ## Architecture Diagrams
@@ -82,9 +99,9 @@ AWS LZA for Healthcare Organizational Structure
 ![Healthcare LZA Architecture](images/LZAforHealthcare_2022-08-30.png)
 
 By default, the LZA for Healthcare builds the above organizational structure, with the exception of the `Management` and `Security` OU, which are predefined by you prior to launching the LZA.  The below architecture diagram highlights the key deployments:
-
+TODO: Update below with actual implementation
 * A `HIS` OU
-  * Contains one `HIS-Prod` and one `HIS-Non-Prod` Account
+  * Contains one `HIS-WL-PROD` and one `HIS-WL-NON-PROD` Account
   * Each contains a single VPC in `us-east-1`
   * Each VPC uses a /16 CIDR block in the 10.0.0.0/8 RFC-1918 range
 * An `Infrastructure` OU

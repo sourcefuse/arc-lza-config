@@ -4,15 +4,15 @@ mandatoryAccounts:
   # The "name" value DOES NOT need to match the account name
   - name: Management
     description: The management (primary) account. Do not change the name field for this mandatory account. Note, the account name key does not need to match the AWS account name.
-    email: <management-account>@example.com <----- UPDATE EMAIL ADDRESS
+    email: ${{ values.mgmt_account_email }}
     organizationalUnit: Root
   - name: LogArchive
     description: The log archive account. Do not change the name field for this mandatory account. Note, the account name key does not need to match the AWS account name.
-    email: <log-archive>@example.com  <----- UPDATE EMAIL ADDRESS
+    email: ${{ values.log_archive_account_email }}
     organizationalUnit: Security
   - name: Audit
     description: The security audit account (also referred to as the audit account). Do not change the name field for this mandatory account. Note, the account name key does not need to match the AWS account name.
-    email: <audit>@example.com  <----- UPDATE EMAIL ADDRESS
+    email: ${{ values.audit_archive_account_email }}
     organizationalUnit: Security
 workloadAccounts:
   # The "name" will be used to set the AWS Account name
@@ -20,17 +20,17 @@ workloadAccounts:
   # The "name" value DOES NOT need to match the account name
   - name: Network-Dev
     description: The Network Dev account
-    email: <<network-Dev-account-email>>
+    email: ${{ values.network_dev_account_email }}
     organizationalUnit: Infrastructure/Infra-Dev    
   - name: Network-Prod
     description: The Network Prod account
-    email: <<network-Prod-account-email>>
+    email: ${{ values.network_prod_account_email }}
     organizationalUnit: Infrastructure/Infra-Prod
-  - name: Pacs-Non_prod
-    description: The Non Prod PACS account
-    email: <<workload-account-email>>
+  - name: HIS-WL-NON-PROD
+    description: The Non Prod WL account
+    email: ${{ values.his_non_prod_wl_account_email }}
     organizationalUnit: HIS/HIS-Non-Prod
-  - name: Pms-Prod
-    description: The PMS prod account
-    email: <<workload-account-email>>
+  - name: HIS-WL-PROD
+    description: The WL prod account
+    email: ${{ values.his_prod_wl_account_email }}
     organizationalUnit: HIS/HIS-Prod    
