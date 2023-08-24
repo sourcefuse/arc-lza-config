@@ -459,18 +459,18 @@ vpcs:
           - name: DynamoDBGateway
             type: gatewayEndpoint
             target: dynamodb
-      - name: HIS-WL-Prod-Public-App-A
-        routes:
-          - name: IgwRoute
-            destination: 0.0.0.0/0
-            type: internetGateway
-            target: IGW
-      - name: HIS-WL-Prod-Public-App-B
-        routes:
-          - name: IgwRoute
-            destination: 0.0.0.0/0
-            type: internetGateway
-            target: IGW
+      # - name: HIS-WL-Prod-Public-App-A
+      #   routes:
+      #     - name: IgwRoute
+      #       destination: 0.0.0.0/0
+      #       type: internetGateway
+      #       target: IGW
+      # - name: HIS-WL-Prod-Public-App-B
+      #   routes:
+      #     - name: IgwRoute
+      #       destination: 0.0.0.0/0
+      #       type: internetGateway
+      #       target: IGW
     subnets:
       - name: HIS-WL-Prod-App-A
         availabilityZone: a
@@ -480,14 +480,14 @@ vpcs:
         availabilityZone: b
         routeTable: HIS-WL-Prod-App-B
         ipv4CidrBlock: 10.3.1.0/24
-      - name: HIS-WL-Prod-Public-App-A
-        availabilityZone: a
-        routeTable: HIS-WL-Prod-Public-App-A
-        ipv4CidrBlock: 10.3.2.0/24
-      - name: HIS-WL-Prod-Public-App-B
-        availabilityZone: b
-        routeTable: HIS-WL-Prod-Public-App-B
-        ipv4CidrBlock: 10.3.3.0/24
+      # - name: HIS-WL-Prod-Public-App-A
+      #   availabilityZone: a
+      #   routeTable: HIS-WL-Prod-Public-App-A
+      #   ipv4CidrBlock: 10.3.2.0/24
+      # - name: HIS-WL-Prod-Public-App-B
+      #   availabilityZone: b
+      #   routeTable: HIS-WL-Prod-Public-App-B
+      #   ipv4CidrBlock: 10.3.3.0/24
       - name: HIS-WL-Prod-MainTgwAttach-A
         availabilityZone: a
         routeTable: HIS-WL-Prod-Tgw-A
@@ -496,11 +496,11 @@ vpcs:
         availabilityZone: b
         routeTable: HIS-WL-Prod-Tgw-B
         ipv4CidrBlock: 10.3.255.224/28
-    natGateways:
-      - name: Nat-HIS-WL-Prod-Public-App-A
-        subnet: HIS-WL-Prod-Public-App-A
-      - name: Nat-HIS-WL-Prod-Public-App-B
-        subnet: HIS-WL-Prod-Public-App-B
+    # natGateways:
+    #   - name: Nat-HIS-WL-Prod-Public-App-A
+    #     subnet: HIS-WL-Prod-Public-App-A
+    #   - name: Nat-HIS-WL-Prod-Public-App-B
+    #     subnet: HIS-WL-Prod-Public-App-B
     transitGatewayAttachments:
       - name: HIS-WL-Prod-Main
         transitGateway:
