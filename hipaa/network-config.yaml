@@ -421,7 +421,7 @@ vpcs:
     region: *HOME_REGION
     cidrs:
       - 10.3.0.0/16
-    internetGateway: true
+    internetGateway: false
     routeTables:
       - name: HIS-WL-Prod-Tgw-A
         routes: []
@@ -429,10 +429,6 @@ vpcs:
         routes: []
       - name: HIS-WL-Prod-App-A
         routes:
-#          - name: NatRoute
-#            destination: 0.0.0.0/0
-#            type: natGateway
-#            target: Nat-HIS-WL-Prod-Public-App-A
           - name: TgwRoute
             destination: 0.0.0.0/0
             type: transitGateway
@@ -445,10 +441,6 @@ vpcs:
             target: dynamodb
       - name: HIS-WL-Prod-App-B
         routes:
-#          - name: NatRoute
-#            destination: 0.0.0.0/0
-#            type: natGateway
-#            target: Nat-HIS-WL-Prod-Public-App-B
           - name: TgwRoute
             destination: 0.0.0.0/0
             type: transitGateway
