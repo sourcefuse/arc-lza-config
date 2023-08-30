@@ -2,7 +2,7 @@ enable: true
 organizationalUnits:
   - name: Security
   - name: Infrastructure
-  - name: Testing
+  - name: Production
 quarantineNewAccounts:
   enable: true
   scpPolicyName: Quarantine
