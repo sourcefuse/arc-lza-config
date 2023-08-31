@@ -21,16 +21,16 @@ workloadAccounts:
   - name: Network-Dev
     description: The Network Dev account
     email: ${{ values.network_dev_account_email }}
-    organizationalUnit: Infrastructure/Infra-Dev    
+    organizationalUnit: Infrastructure/INFRA-DEV   
   - name: Network-Prod
     description: The Network Prod account
     email: ${{ values.network_prod_account_email }}
-    organizationalUnit: Infrastructure/Infra-Prod
+    organizationalUnit: Infrastructure/INFRA-PROD
   - name: HIS-WL-NON-PROD
     description: The Non Prod WL account
     email: ${{ values.his_non_prod_wl_account_email }}
-    organizationalUnit: HIS/HIS-Non-Prod
+    organizationalUnit: HIS/HIS-NON-PROD
   - name: HIS-WL-PROD
     description: The WL prod account
     email: ${{ values.his_prod_wl_account_email }}
-    organizationalUnit: HIS/HIS-Prod    
+    organizationalUnit: HIS/HIS-PROD   
