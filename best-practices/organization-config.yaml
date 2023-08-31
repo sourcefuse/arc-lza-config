@@ -2,7 +2,7 @@ enable: true
 organizationalUnits:
   - name: Security
   - name: Infrastructure
-  - name: Testing
+  - name: Workload
 quarantineNewAccounts:
   enable: true
   scpPolicyName: Quarantine
@@ -14,7 +14,7 @@ serviceControlPolicies:
     type: customerManaged
     deploymentTargets:
       organizationalUnits:
-        - Infrastructure
+        - Root
   - name: AcceleratorGuardrails2
     description: >
       Accelerator GuardRails 2
@@ -22,7 +22,7 @@ serviceControlPolicies:
     type: customerManaged
     deploymentTargets:
       organizationalUnits:
-        - Infrastructure
+        - Root
   - name: Quarantine
     description: >
       This SCP is used to prevent changes to new accounts until the Accelerator
