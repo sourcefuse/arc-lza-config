@@ -32,7 +32,7 @@ workloadAccounts:
     description: The Network account
     email: ${{ values.network_account_email }}
     organizationalUnit: Infrastructure
-  - name: Testing-Workload
-    description: The Workload account
-    email: ${{ values.network_account_email }}
-    organizationalUnit: Testing
+  - name: Dev-Workload
+    description: The Dev Workload account
+    email: ${{ values.dev_account_email }}
+    organizationalUnit: Workload
