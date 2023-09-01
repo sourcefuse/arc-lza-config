@@ -4,7 +4,7 @@ mandatoryAccounts:
       The management (primary) account. Do not change the name field for this
       mandatory account. Note, the account name key does not need to match the
       AWS account name.
-    email: root@email-domain.com
+    email: ${{ values.mgmt_account_email }}
     organizationalUnit: Root
     warm: false
   - name: LogArchive
@@ -12,7 +12,7 @@ mandatoryAccounts:
       The log archive account. Do not change the name field for this mandatory
       account. Note, the account name key does not need to match the AWS account
       name.
-    email: aws+log-archive@email-domain.com
+    email: ${{ values.log_archive_account_email }}
     organizationalUnit: Security
     warm: false
   - name: Audit
@@ -20,28 +20,28 @@ mandatoryAccounts:
       The security audit account (also referred to as the audit account). Do not
       change the name field for this mandatory account. Note, the account name
       key does not need to match the AWS account name.
-    email: aws+audit@email-domain.com
+    email: ${{ values.audit_archive_account_email }}
     organizationalUnit: Security
     warm: false
 workloadAccounts:
   - name: Network
     description: The Network account
-    email: aws+network@email-domain.com
+    email: ${{ values.network_account_email }}
     organizationalUnit: Infrastructure
   - name: SharedServices
     description: The SharedServices account
-    email: aws+shared-services@email-domain.com
+    email: ${{ values.shared_services_account_email }}
     organizationalUnit: Infrastructure
   - name: Dev
     description: The Dev Account for workloads
-    email: aws+dev@email-domain.com
+    email: ${{ values.dev_account_email }}
     organizationalUnit: NonProduction     
   - name: Staging
     description: The Staging Account for workloads
-    email: aws+staging@email-domain.com
+    email: ${{ values.staging_account_email }}
     organizationalUnit: NonProduction  
   - name: Production
     description: The Production Account for workloads
-    email: aws+production@email-domain.com
+    email: ${{ values.prod_account_email }}
     organizationalUnit: Production
        

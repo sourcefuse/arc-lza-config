@@ -1,12 +1,3 @@
-#  defaultVpc:
-#   delete: true
-#   excludeAccounts: []
-#  transitGateways: []
-#  endpointPolicies: []
-#  vpcs: []
- 
- # Uncomment below to turn back on best practices
-
 homeRegion: &HOME_REGION us-east-1
 #####################################
 # Delete default VPCs-- use this    #
