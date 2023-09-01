@@ -24,15 +24,24 @@ mandatoryAccounts:
     organizationalUnit: Security
     warm: false
 workloadAccounts:
-  - name: SharedServices
-    description: The SharedServices account
-    email:  ${{ values.shared_services_account_email }}
-    organizationalUnit: Infrastructure
   - name: Network
     description: The Network account
     email: ${{ values.network_account_email }}
     organizationalUnit: Infrastructure
-  - name: Dev-Workload
-    description: The Dev Workload account
+  - name: SharedServices
+    description: The SharedServices account
+    email: ${{ values.shared_services_account_email }}
+    organizationalUnit: Infrastructure
+  - name: Dev
+    description: The Dev Account for workloads
     email: ${{ values.dev_account_email }}
-    organizationalUnit: Workload
+    organizationalUnit: NonProduction     
+  - name: Staging
+    description: The Staging Account for workloads
+    email: ${{ values.staging_account_email }}
+    organizationalUnit: NonProduction  
+  - name: Production
+    description: The Production Account for workloads
+    email: ${{ values.prod_account_email }}
+    organizationalUnit: Production
+       
