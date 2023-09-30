@@ -254,12 +254,6 @@ vpcs:
             destination: 10.0.0.0/8
             type: transitGateway
             target: Network-Main
-          - name: S3Gateway
-            type: gatewayEndpoint
-            target: s3
-          - name: DynamoDBGateway
-            type: gatewayEndpoint
-            target: dynamodb
       - name: Network-Inspection-B
         routes:
           - name: NatRoute
@@ -270,12 +264,6 @@ vpcs:
             destination: 10.0.0.0/8
             type: transitGateway
             target: Network-Main
-          - name: S3Gateway
-            type: gatewayEndpoint
-            target: s3
-          - name: DynamoDBGateway
-            type: gatewayEndpoint
-            target: dynamodb
       - name: Network-Inspection-Nat-A
         routes:
           - name: NfwNatRoute
@@ -287,6 +275,12 @@ vpcs:
             destination: 0.0.0.0/0
             type: internetGateway
             target: IGW
+          - name: S3Gateway
+            type: gatewayEndpoint
+            target: s3
+          - name: DynamoDBGateway
+            type: gatewayEndpoint
+            target: dynamodb
       - name: Network-Inspection-Nat-B
         routes:
           - name: NfwNatRoute
@@ -298,6 +292,12 @@ vpcs:
             destination: 0.0.0.0/0
             type: internetGateway
             target: IGW
+          - name: S3Gateway
+            type: gatewayEndpoint
+            target: s3
+          - name: DynamoDBGateway
+            type: gatewayEndpoint
+            target: dynamodb
     subnets:
       - name: Network-Inspection-A
         availabilityZone: a
@@ -363,24 +363,12 @@ vpcs:
             destination: 0.0.0.0/0
             type: transitGateway
             target: Network-Main
-          - name: S3Gateway
-            type: gatewayEndpoint
-            target: s3
-          - name: DynamoDBGateway
-            type: gatewayEndpoint
-            target: dynamodb
       - name: HIS-WL-Non-Prod-App-B
         routes:
           - name: TgwRoute
             destination: 0.0.0.0/0
             type: transitGateway
             target: Network-Main
-          - name: S3Gateway
-            type: gatewayEndpoint
-            target: s3
-          - name: DynamoDBGateway
-            type: gatewayEndpoint
-            target: dynamodb
     subnets:
       - name: HIS-WL-Non-Prod-App-A
         availabilityZone: a
@@ -412,9 +400,7 @@ vpcs:
           - HIS-WL-Non-Prod-MainTgwAttach-B
     gatewayEndpoints:
       defaultPolicy: Default
-      endpoints:
-        - service: s3
-        - service: dynamodb
+      endpoints: []
     useCentralEndpoints: true
   - name: HIS-WL-Prod-Main
     account: HIS-WL-PROD
@@ -433,24 +419,12 @@ vpcs:
             destination: 0.0.0.0/0
             type: transitGateway
             target: Network-Main
-          - name: S3Gateway
-            type: gatewayEndpoint
-            target: s3
-          - name: DynamoDBGateway
-            type: gatewayEndpoint
-            target: dynamodb
       - name: HIS-WL-Prod-App-B
         routes:
           - name: TgwRoute
             destination: 0.0.0.0/0
             type: transitGateway
             target: Network-Main
-          - name: S3Gateway
-            type: gatewayEndpoint
-            target: s3
-          - name: DynamoDBGateway
-            type: gatewayEndpoint
-            target: dynamodb
     subnets:
       - name: HIS-WL-Prod-App-A
         availabilityZone: a
