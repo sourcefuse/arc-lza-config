@@ -2,7 +2,7 @@ enable: true
 organizationalUnits:
   - name: Security
   - name: Infrastructure
-  - name: Infrastructure/INFRA-DEV
+  # - name: Infrastructure/INFRA-DEV
   - name: Infrastructure/INFRA-PROD
   - name: HIS
   # - name: EIS
