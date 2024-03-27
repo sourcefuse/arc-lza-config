@@ -10,7 +10,7 @@ transitGateways:
       organizationalUnits:
         - Infrastructure
         - HIS
-        - EIS
+        # - EIS
     asn: 65521
     dnsSupport: enable
     vpnEcmpSupport: enable
@@ -347,47 +347,47 @@ vpcs:
         - service: s3
         - service: dynamodb
     useCentralEndpoints: true
-  - name: HIS-WL-Non-Prod-Main
-    account: HIS-WL-NON-PROD
+  - name: HIS-WL-STG-Main
+    account: HIS-WL-STG
     region: *HOME_REGION
     cidrs:
       - 10.4.0.0/16
     routeTables:
-      - name: HIS-WL-Non-Prod-Tgw-A
+      - name: HIS-WL-STG-Tgw-A
         routes: []
-      - name: HIS-WL-Non-Prod-Tgw-B
+      - name: HIS-WL-STG-Tgw-B
         routes: []
-      - name: HIS-WL-Non-Prod-App-A
+      - name: HIS-WL-STG-App-A
         routes:
           - name: TgwRoute
             destination: 0.0.0.0/0
             type: transitGateway
             target: Network-Main
-      - name: HIS-WL-Non-Prod-App-B
+      - name: HIS-WL-STG-App-B
         routes:
           - name: TgwRoute
             destination: 0.0.0.0/0
             type: transitGateway
             target: Network-Main
     subnets:
-      - name: HIS-WL-Non-Prod-App-A
+      - name: HIS-WL-STG-App-A
         availabilityZone: a
-        routeTable: HIS-WL-Non-Prod-App-A
+        routeTable: HIS-WL-STG-App-A
         ipv4CidrBlock: 10.4.0.0/24
-      - name: HIS-WL-Non-Prod-App-B
+      - name: HIS-WL-STG-App-B
         availabilityZone: b
-        routeTable: HIS-WL-Non-Prod-App-B
+        routeTable: HIS-WL-STG-App-B
         ipv4CidrBlock: 10.4.1.0/24
-      - name: HIS-WL-Non-Prod-MainTgwAttach-A
+      - name: HIS-WL-STG-MainTgwAttach-A
         availabilityZone: a
-        routeTable: HIS-WL-Non-Prod-Tgw-A
+        routeTable: HIS-WL-STG-Tgw-A
         ipv4CidrBlock: 10.4.255.208/28
-      - name: HIS-WL-Non-Prod-MainTgwAttach-B
+      - name: HIS-WL-STG-MainTgwAttach-B
         availabilityZone: b
-        routeTable: HIS-WL-Non-Prod-Tgw-B
+        routeTable: HIS-WL-STG-Tgw-B
         ipv4CidrBlock: 10.4.255.224/28
     transitGatewayAttachments:
-      - name: HIS-WL-Non-Prod-Main
+      - name: HIS-WL-STG-Main
         transitGateway:
           name: Network-Main
           account: Network-Prod
@@ -396,8 +396,8 @@ vpcs:
         routeTablePropagations:
           - Network-Main-Core
         subnets:
-          - HIS-WL-Non-Prod-MainTgwAttach-A
-          - HIS-WL-Non-Prod-MainTgwAttach-B
+          - HIS-WL-STG-MainTgwAttach-A
+          - HIS-WL-STG-MainTgwAttach-B
     gatewayEndpoints:
       defaultPolicy: Default
       endpoints: []
